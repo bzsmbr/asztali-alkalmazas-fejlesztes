@@ -5,7 +5,7 @@ public class MotorcycleEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public uint Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(128)]
     [Required]
@@ -22,20 +22,20 @@ public class MotorcycleEntity
     public string Model {  get; set; }
 
     [Required]
-    public uint Cubic {  get; set; }
+    public int Cubic {  get; set; }
 
     [Required]
-    public uint ReleaseYear { get; set; }
+    public int ReleaseYear { get; set; }
 
     [Required]
-    public uint Cylinders { get; set; }
+    public int Cylinders { get; set; }
 
     [ForeignKey("Manufacturer")]
-    public uint ManufacturerId { get; set; }
+    public int ManufacturerId { get; set; }
     public virtual ManufacturerEntity Manufacturer { get; set; }
 
     [ForeignKey("Type")]
-    public uint TypeId { get; set; }
+    public int TypeId { get; set; }
 
     public virtual MotorcycleTypeEntity Type { get; set; }
 }

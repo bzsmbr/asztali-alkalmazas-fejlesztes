@@ -73,31 +73,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Common" Version="8.3.2" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
-		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="5.1.0" />
+		<PackageReference Include="CommunityToolkit.Common" Version="8.4.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
+		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="6.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="ErrorOr" Version="2.0.1" />
 		<PackageReference Include="FluentValidation" Version="12.0.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-		<PackageReference Include="Google.Apis" Version="1.69.0" />
-		<PackageReference Include="Google.Apis.Auth" Version="1.69.0" />
-		<PackageReference Include="Google.Apis.Drive.v3" Version="1.68.0.3627" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+		<PackageReference Include="Google.Apis" Version="1.70.0" />
+		<PackageReference Include="Google.Apis.Auth" Version="1.70.0" />
+		<PackageReference Include="Google.Apis.Drive.v3" Version="1.70.0.3893" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.12" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.12" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.110" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.110" />
 		<PackageReference Include="Syncfusion.Maui.Core" Version="31.1.18" />
 		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.6" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />

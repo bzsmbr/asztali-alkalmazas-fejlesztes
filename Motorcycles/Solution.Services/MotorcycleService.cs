@@ -6,8 +6,8 @@ public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
 
     public async Task<ErrorOr<MotorcycleModel>> CreateAsync(MotorcycleModel model)
     {
-        bool exists = await dbContext.Motorcycles.AnyAsync(x => x.ManufacturerId == model.Manufacturer.Value.Id &&
-                                                                x.Model.ToLower() == model.Model.Value.ToLower().Trim() &&
+        bool exists = await dbContext.Motorcycles.AnyAsync(x => x.ManufacturerId == model.Manufacturer.Id &&
+                                                                x.Model.ToLower() == model.Model.ToLower().Trim() &&
                                                                 x.ReleaseYear == model.ReleaseYear.Value);
 
         if (exists)
@@ -33,8 +33,8 @@ public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
                                                 .Include(x => x.Manufacturer)
                                                 .Where(x => x.PublicId == model.Id)
                                                 .ExecuteUpdateAsync(x => x.SetProperty(p => p.PublicId, model.Id)
-                                                                          .SetProperty(p => p.ManufacturerId, model.Manufacturer.Value.Id)
-                                                                          .SetProperty(p => p.Model, model.Model.Value)
+                                                                          .SetProperty(p => p.ManufacturerId, model.Manufacturer.Id)
+                                                                          .SetProperty(p => p.Model, model.Model)
                                                                           .SetProperty(p => p.Cubic, model.Cubic.Value)
                                                                           .SetProperty(p => p.ReleaseYear, model.ReleaseYear.Value)
                                                                           .SetProperty(p => p.Cylinders, model.NumberOfCylinders.Value)

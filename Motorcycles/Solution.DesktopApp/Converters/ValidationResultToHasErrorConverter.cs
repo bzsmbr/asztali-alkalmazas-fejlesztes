@@ -1,7 +1,4 @@
-﻿using FluentValidation.Results;
-using System.Globalization;
-
-namespace Solution.DesktopApp.Converters;
+﻿namespace Solution.DesktopApp.Converters;
 
 public class ValidationResultToHasErrorConverter : IValueConverter
 {

@@ -1,6 +1,8 @@
-﻿namespace Microsoft.Maui.Controls;
+﻿using System.Runtime.CompilerServices;
 
-public static class NavigationStackExtensions
+namespace Microsoft.Maui.Controls;
+
+public static class NavigationStackExtension
 {
     public static void ClearNavigationStack(this Shell currentShell)
     {

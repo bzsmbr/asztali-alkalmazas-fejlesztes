@@ -16,18 +16,18 @@ namespace Solution.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Solution.Database.Entities.ManufacturerEntity", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -44,24 +44,24 @@ namespace Solution.Database.Migrations
 
             modelBuilder.Entity("Solution.Database.Entities.MotorcycleEntity", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Cubic")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Cubic")
+                        .HasColumnType("int");
 
-                    b.Property<long>("Cylinders")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Cylinders")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageId")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<long>("ManufacturerId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ManufacturerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -73,11 +73,11 @@ namespace Solution.Database.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
-                    b.Property<long>("ReleaseYear")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ReleaseYear")
+                        .HasColumnType("int");
 
-                    b.Property<long>("TypeId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("WebContentLink")
                         .HasMaxLength(512)
@@ -94,11 +94,11 @@ namespace Solution.Database.Migrations
 
             modelBuilder.Entity("Solution.Database.Entities.MotorcycleTypeEntity", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

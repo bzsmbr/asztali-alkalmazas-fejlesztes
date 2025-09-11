@@ -21,3 +21,4 @@ global using System.Windows.Input;
 global using ErrorOr;
 global using Syncfusion.Maui.Core.Hosting;
 global using Syncfusion.Maui.Toolkit.Hosting;
+global using FluentValidation;

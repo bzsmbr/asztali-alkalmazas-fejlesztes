@@ -8,3 +8,4 @@ global using Solution.Core.Models.Settings;
 global using Solution.DataBase;
 global using Microsoft.EntityFrameworkCore;
 global using Solution.Core.Models;
+global using Microsoft.Maui.Storage;

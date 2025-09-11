@@ -3,7 +3,7 @@
 public partial class ManufacturerModel : ObservableObject
 {
     [ObservableProperty]
-    private uint id;
+    private int id;
 
     [ObservableProperty]
     private string name;
@@ -12,7 +12,7 @@ public partial class ManufacturerModel : ObservableObject
     {
     }
 
-    public ManufacturerModel(uint id, string name)
+    public ManufacturerModel(int id, string name)
     {
         Id = id;
         Name = name;

@@ -21,7 +21,7 @@ public partial class CreateOrEditMotorcycleViewModel(
 
 
     #region validate
-    public IRelayCommand ValidateCommand => new AsyncRelayCommand<string>(OnValidateAsync);
+    public ICommand ValidateCommand => new Command<string>(OnValidateAsync);
     #endregion
     
     private MotorcycleModelValidator validator => new MotorcycleModelValidator();
@@ -164,7 +164,7 @@ public partial class CreateOrEditMotorcycleViewModel(
         {
             return;
         }
-
+        
         var imageUploadResult = await googleDriveService.UploadFileAsync(selectedFile);
 
         var message = imageUploadResult.IsError ? imageUploadResult.FirstError.Description : "Motorcycle image uploaded.";
@@ -172,8 +172,8 @@ public partial class CreateOrEditMotorcycleViewModel(
 
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
 
-        this.ImageId = imageUploadResult.IsError ? null : imageUploadResult.Id;
-        this.WebContentLink = imageUploadResult.IsError ? null : imageUploadResult.WebContentLink;
+        this.ImageId = imageUploadResult.IsError ? null : imageUploadResult.Value.Id;
+        this.WebContentLink = imageUploadResult.IsError ? null : imageUploadResult.Value.WebContentLink;
     }
 
     private async Task LoadManufacturersAsync()
@@ -206,9 +206,9 @@ public partial class CreateOrEditMotorcycleViewModel(
         this.ImageId = null;
     }
 
-    private async Task OnValidateAsync(string propertyName)
+    private async void OnValidateAsync(string propertyName)
     {
-        var result = await validator.ValidateAsync(this, options => options.InculdeProperties(propertyName));
+        var result = await validator.ValidateAsync(this, options => options.IncludeProperties(propertyName));
 
         ValidationResult.Errors.Remove(ValidationResult.Errors.FirstOrDefault(x => x.PropertyName == propertyName));
 

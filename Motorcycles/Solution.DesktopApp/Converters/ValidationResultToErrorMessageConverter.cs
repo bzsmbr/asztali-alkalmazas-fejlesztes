@@ -1,9 +1,6 @@
-﻿using FluentValidation.Results;
-using System.Globalization;
+﻿namespace Solution.DesktopApp.Converters;
 
-namespace Solution.DesktopApp.Converters;
-
-public class ValidationResultToErrorMessageConverter : IValueConverter
+public class ValidationResultToErrorMessagesConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

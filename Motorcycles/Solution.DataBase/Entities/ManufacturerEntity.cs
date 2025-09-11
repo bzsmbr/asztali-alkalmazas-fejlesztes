@@ -6,7 +6,7 @@ public class ManufacturerEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public uint Id { get; set; }
+    public int Id { get; set; }
 
     [StringLength(64)]
     [Required]
