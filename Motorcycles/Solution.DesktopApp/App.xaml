@@ -11,10 +11,10 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
+            
             <converters:ValidationResultToErrorMessagesConverter x:Key="ValidationResultToErrorMessagesConverter" />
-            <converters:ValidationResultToHasErrorConverter x:Key="ValidationResultToHasErrorConverter" />
-
+            <converters:ValidationResultHasErrorConverter x:Key="ValidationResultHasErrorConverter" />
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>

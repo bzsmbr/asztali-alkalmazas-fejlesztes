@@ -5,7 +5,7 @@
 namespace Solution.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class manufacturers : Migration
+    public partial class brands : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

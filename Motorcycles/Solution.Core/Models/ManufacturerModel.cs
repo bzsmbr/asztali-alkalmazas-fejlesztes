@@ -1,4 +1,6 @@
-﻿namespace Solution.Core.Models;
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace Solution.Core.Models;
 
 public partial class ManufacturerModel : ObservableObject
 {
@@ -27,5 +29,20 @@ public partial class ManufacturerModel : ObservableObject
 
         Id = entity.Id;
         Name = entity.Name;
+    }
+
+    public ManufacturerEntity ToEntity()
+    {
+        return new ManufacturerEntity
+        {
+            Name = Name,
+            Id = Id
+        };
+    }
+
+    public void ToEntity(ManufacturerEntity entity)
+    {
+        entity.Name = Name;
+        entity.Id = Id;
     }
 }

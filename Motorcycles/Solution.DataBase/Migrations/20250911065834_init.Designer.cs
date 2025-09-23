@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Solution.DataBase;
+using Solution.Database;
 
 #nullable disable
 
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250911064746_init")]
+    [Migration("20250911065834_init")]
     partial class init
     {
         /// <inheritdoc />

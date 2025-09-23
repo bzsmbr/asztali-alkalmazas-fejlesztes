@@ -1,7 +1,4 @@
-﻿using FluentValidation.Results;
-using Solution.Validators;
-
-namespace Solution.DesktopApp.ViewModels;
+﻿namespace Solution.DesktopApp.ViewModels;
 
 public partial class CreateOrEditMotorcycleViewModel(
     AppDbContext dbContext,
@@ -13,22 +10,16 @@ public partial class CreateOrEditMotorcycleViewModel(
     public IAsyncRelayCommand DisappearingCommand => new AsyncRelayCommand(OnDisappearingAsync);
     #endregion
 
+    public ICommand ValidateCommand => new Command<string>(OnValidateAsync);
+
     #region event commands
     public IAsyncRelayCommand SubmitCommand => new AsyncRelayCommand(OnSubmitAsync);
     public IAsyncRelayCommand ImageSelectCommand => new AsyncRelayCommand(OnImageSelectAsync);
     #endregion
-
-
-
-    #region validate
-    public ICommand ValidateCommand => new Command<string>(OnValidateAsync);
-    #endregion
-    
     private MotorcycleModelValidator validator => new MotorcycleModelValidator();
 
     [ObservableProperty]
     private ValidationResult validationResult = new ValidationResult();
-
 
     private delegate Task ButtonActionDelagate();
     private ButtonActionDelagate asyncButtonAction;
@@ -104,10 +95,11 @@ public partial class CreateOrEditMotorcycleViewModel(
 
         if (!ValidationResult.IsValid)
         {
+            await Application.Current.MainPage.DisplayAlert("Error", "Save failed", "OK");
             return;
         }
 
-        await UploaImageAsync();
+        await UploadImageAsync();
 
         var result = await motorcycleService.CreateAsync(this);
         var message = result.IsError ? result.FirstError.Description : "Motorcycle saved.";
@@ -123,15 +115,12 @@ public partial class CreateOrEditMotorcycleViewModel(
 
     private async Task OnUpdateAsync()
     {
-        this.ValidationResult = await validator.ValidateAsync(this);
-
         if (!ValidationResult.IsValid)
         {
             return;
         }
 
-
-        await UploaImageAsync();
+        await UploadImageAsync();
 
         var result = await motorcycleService.UpdateAsync(this);
 
@@ -158,13 +147,13 @@ public partial class CreateOrEditMotorcycleViewModel(
         Image = ImageSource.FromStream(() => stream);
     }
 
-    private async Task UploaImageAsync()
+    private async Task UploadImageAsync()
     {
         if (selectedFile is null)
         {
             return;
         }
-        
+
         var imageUploadResult = await googleDriveService.UploadFileAsync(selectedFile);
 
         var message = imageUploadResult.IsError ? imageUploadResult.FirstError.Description : "Motorcycle image uploaded.";
@@ -215,6 +204,6 @@ public partial class CreateOrEditMotorcycleViewModel(
         ValidationResult.Errors.Remove(ValidationResult.Errors.FirstOrDefault(x => x.PropertyName == MotorcycleModelValidator.GlobalProperty));
         ValidationResult.Errors.AddRange(result.Errors);
 
-        OnPropertyChanged(nameof(ValidationResult));
+        OnPropertyChanged(nameof(propertyName));
     }
 }

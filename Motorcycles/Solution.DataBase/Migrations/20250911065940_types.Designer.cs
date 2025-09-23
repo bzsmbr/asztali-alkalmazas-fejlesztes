@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Solution.DataBase;
+using Solution.Database;
 
 #nullable disable
 
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250911065451_manufacturers")]
-    partial class manufacturers
+    [Migration("20250911065940_types")]
+    partial class types
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,6 +1,4 @@
-﻿
-
-namespace Solution.Core.Interfaces;
+﻿namespace Solution.Core.Interfaces;
 
 public interface IGoogleDriveService
 {

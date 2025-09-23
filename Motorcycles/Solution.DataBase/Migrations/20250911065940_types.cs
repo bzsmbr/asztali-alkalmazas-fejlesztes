@@ -5,7 +5,7 @@
 namespace Solution.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class type : Migration
+    public partial class types : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

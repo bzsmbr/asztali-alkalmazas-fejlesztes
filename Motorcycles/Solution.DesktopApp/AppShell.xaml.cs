@@ -18,5 +18,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(MainView.Name, typeof(MainView));
         Routing.RegisterRoute(MotorcycleListView.Name, typeof(MotorcycleListView));
         Routing.RegisterRoute(CreateOrEditMotorcycleView.Name, typeof(CreateOrEditMotorcycleView));
+        Routing.RegisterRoute(AddManufacturerView.Name, typeof(AddManufacturerView));
+        Routing.RegisterRoute(AddTypeView.Name, typeof(AddTypeView));
     }
 }

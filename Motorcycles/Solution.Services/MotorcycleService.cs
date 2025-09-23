@@ -8,7 +8,7 @@ public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
     {
         bool exists = await dbContext.Motorcycles.AnyAsync(x => x.ManufacturerId == model.Manufacturer.Id &&
                                                                 x.Model.ToLower() == model.Model.ToLower().Trim() &&
-                                                                x.ReleaseYear == model.ReleaseYear.Value);
+                                                                x.ReleaseYear == model.ReleaseYear);
 
         if (exists)
         {
@@ -30,14 +30,14 @@ public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
     public async Task<ErrorOr<Success>> UpdateAsync(MotorcycleModel model)
     {
         var result = await dbContext.Motorcycles.AsNoTracking()
-                                                .Include(x => x.Manufacturer)
                                                 .Where(x => x.PublicId == model.Id)
                                                 .ExecuteUpdateAsync(x => x.SetProperty(p => p.PublicId, model.Id)
                                                                           .SetProperty(p => p.ManufacturerId, model.Manufacturer.Id)
+                                                                          .SetProperty(p => p.TypeId, model.Type.Id)
                                                                           .SetProperty(p => p.Model, model.Model)
-                                                                          .SetProperty(p => p.Cubic, model.Cubic.Value)
-                                                                          .SetProperty(p => p.ReleaseYear, model.ReleaseYear.Value)
-                                                                          .SetProperty(p => p.Cylinders, model.NumberOfCylinders.Value)
+                                                                          .SetProperty(p => p.Cubic, model.Cubic)
+                                                                          .SetProperty(p => p.ReleaseYear, model.ReleaseYear)
+                                                                          .SetProperty(p => p.Cylinders, model.NumberOfCylinders)
                                                                           .SetProperty(p => p.ImageId, model.ImageId)
                                                                           .SetProperty(p => p.WebContentLink, model.WebContentLink));
         return result > 0 ? Result.Success : Error.NotFound();

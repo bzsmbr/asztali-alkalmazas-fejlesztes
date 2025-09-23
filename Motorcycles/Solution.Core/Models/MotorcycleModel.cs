@@ -3,34 +3,49 @@
 public partial class MotorcycleModel : ObservableObject
 {
     [ObservableProperty]
+    [JsonPropertyName("id")]
     private string id;
 
     [ObservableProperty]
+    [JsonPropertyName("imageId")]
     private string imageId;
 
     [ObservableProperty]
+    [JsonPropertyName("webContentLink")]
     private string webContentLink;
 
     [ObservableProperty]
+    [JsonPropertyName("manufacturer")]
     private ManufacturerModel manufacturer;
-
+    
     [ObservableProperty]
+    [JsonPropertyName("type")]
     private TypeModel type;
-
+    
     [ObservableProperty]
+    [JsonPropertyName("model")]
     private string model;
-
+    
     [ObservableProperty]
-    private int? cubic;
-
+    [JsonPropertyName("cubic")]
+    private int cubic;
+    
     [ObservableProperty]
-    private int? releaseYear;
-
+    [JsonPropertyName("releaseYear")]
+    private int releaseYear;
+    
     [ObservableProperty]
-    private int? numberOfCylinders;
+    [JsonPropertyName("numberOfCylinders")]
+    private int numberOfCylinders;
 
     public MotorcycleModel()
     {
+        this.Manufacturer = new ManufacturerModel();
+        this.Type = new TypeModel();
+        this.Model = model;
+        this.Cubic = cubic;
+        this.ReleaseYear = releaseYear;
+        this.NumberOfCylinders = numberOfCylinders;
     }
 
     public MotorcycleModel(MotorcycleEntity entity)
@@ -56,9 +71,9 @@ public partial class MotorcycleModel : ObservableObject
             ImageId = ImageId,
             WebContentLink = WebContentLink,
             Model = Model,
-            Cubic = Cubic.Value,
-            ReleaseYear = ReleaseYear.Value,
-            Cylinders = NumberOfCylinders.Value
+            Cubic = Cubic,
+            ReleaseYear = ReleaseYear,
+            Cylinders = NumberOfCylinders
         };
     }
 
@@ -70,8 +85,8 @@ public partial class MotorcycleModel : ObservableObject
         entity.ImageId = ImageId;
         entity.WebContentLink = WebContentLink;
         entity.Model = Model;
-        entity.Cubic = Cubic.Value;
-        entity.ReleaseYear = ReleaseYear.Value;
-        entity.Cylinders = NumberOfCylinders.Value;
+        entity.Cubic = Cubic;
+        entity.ReleaseYear = ReleaseYear;
+        entity.Cylinders = NumberOfCylinders;
     }
 }

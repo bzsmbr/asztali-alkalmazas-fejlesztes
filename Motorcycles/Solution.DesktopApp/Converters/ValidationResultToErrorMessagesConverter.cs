@@ -1,4 +1,8 @@
-﻿namespace Solution.DesktopApp.Converters;
+﻿
+using FluentValidation.Results;
+using System.Globalization;
+
+namespace Solution.DesktopApp.Converters;
 
 public class ValidationResultToErrorMessagesConverter : IValueConverter
 {
@@ -15,12 +19,13 @@ public class ValidationResultToErrorMessagesConverter : IValueConverter
         }
 
         var property = parameter as string;
-        var errorMessages = validationResult.Errors.Where(x => x.PropertyName == property)
-                                                   .Select(x => x.ErrorMessage);
+        var errorMessages = validationResult.Errors.Where(x => x.PropertyName == property).Select(x => x.ErrorMessage);
 
         return string.Join(Environment.NewLine, errorMessages);
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => throw new NotImplementedException("ConvertBack is not implemented for the converter");
-
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException("ConvertBack is not implemented");
+    }
 }

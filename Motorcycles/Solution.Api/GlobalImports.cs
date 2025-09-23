@@ -1,0 +1,11 @@
+﻿global using Solution.Api.Configurations;
+global using Microsoft.AspNetCore.Mvc;
+global using Solution.Core.Interfaces;
+global using Solution.Database;
+global using Microsoft.EntityFrameworkCore;
+global using Solution.Core.Models;
+global using System.ComponentModel.DataAnnotations;
+global using FluentValidation;
+global using FluentValidation.AspNetCore;
+global using Solution.Services;
+global using Solution.Validators.Interceptors;

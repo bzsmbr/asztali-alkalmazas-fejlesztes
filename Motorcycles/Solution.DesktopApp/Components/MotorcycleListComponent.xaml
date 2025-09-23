@@ -26,22 +26,22 @@
                 </Image.Source>
             </Image>
             <Label Grid.Column="1"
-                   Text="{Binding Motorcycle.Manufacturer.Value.Name, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.Manufacturer.Name, Source={x:Reference this}}" 
                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             <Label Grid.Column="2"
-                   Text="{Binding Motorcycle.Model.Value, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.Model, Source={x:Reference this}}" 
                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             <Label Grid.Column="3"
-                   Text="{Binding Motorcycle.Type.Value.Name, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.Type.Name, Source={x:Reference this}}" 
                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             <Label Grid.Column="4"
-                   Text="{Binding Motorcycle.ReleaseYear.Value, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.ReleaseYear, Source={x:Reference this}}" 
                    HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
             <Label Grid.Column="5"
-                   Text="{Binding Motorcycle.NumberOfCylinders.Value, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.NumberOfCylinders, Source={x:Reference this}}" 
                    HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
             <Label Grid.Column="6"
-                   Text="{Binding Motorcycle.Cubic.Value, Source={x:Reference this}}" 
+                   Text="{Binding Motorcycle.Cubic, Source={x:Reference this}}" 
                    HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
             <ImageButton Grid.Column="7"
                          Source="{AppThemeBinding Light=edit_dark.png, Dark=edit_light.png}"
