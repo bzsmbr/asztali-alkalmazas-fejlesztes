@@ -1,8 +1,4 @@
-﻿using ErrorOr;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Solution.Core.Models.Keys;
-
-namespace Solution.Api.Controllers;
+﻿namespace Solution.Api.Controllers;
 
 [ApiController]
 public class BaseController : ControllerBase
@@ -11,10 +7,11 @@ public class BaseController : ControllerBase
     {
         HttpContext.Items[HttpContextItemKeys.Errors] = errors;
 
-        if(errors.All(e => e.Type == ErrorType.Validation))
+        if (errors.All(e => e.Type == ErrorType.Validation))
         {
             var modelStateDictionary = new ModelStateDictionary();
-            foreach(var error in errors)
+
+            foreach (var error in errors)
             {
                 modelStateDictionary.AddModelError(error.Code, error.Description);
             }
@@ -22,7 +19,7 @@ public class BaseController : ControllerBase
             return ValidationProblem(modelStateDictionary);
         }
 
-        if(errors.Any(e => e.Type == ErrorType.Unexpected))
+        if (errors.Any(e => e.Type == ErrorType.Unexpected))
         {
             return Problem();
         }
@@ -41,4 +38,4 @@ public class BaseController : ControllerBase
     }
 }
 
-public record OkResult(bool Success = true);
+internal record OkResult(bool Success = true);
