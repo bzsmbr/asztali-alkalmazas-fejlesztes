@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solution.DesktopApp.Components.TypeListComponent"
+             x:Name="this">
+    <Border Padding="0,10,0,10">
+        <Grid Padding="10,0,10,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="1"
+                   Text="{Binding Type.Name, Source={x:Reference this}}" 
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+            <ImageButton Grid.Column="7"
+                         Source="{AppThemeBinding Light=edit_dark.png, Dark=edit_light.png}"
+                         Command="{Binding EditCommand, Source={x:Reference this}}"
+                         HorizontalOptions="End" VerticalOptions="Center" 
+                         BackgroundColor="Transparent"
+                         WidthRequest="25" HeightRequest="25"/>
+            <ImageButton Grid.Column="8"
+                         Source="{AppThemeBinding Light=delete_dark.png, Dark=delete_light.png}"
+                         Command="{Binding DeleteCommand, Source={x:Reference this}}"
+                         CommandParameter="{Binding Type.Id, Source={x:Reference this}}"
+                         HorizontalOptions="End" VerticalOptions="Center" 
+                         BackgroundColor="Transparent"
+                         WidthRequest="25" HeightRequest="25"/>
+        </Grid>
+    </Border>
+
+</ContentView>

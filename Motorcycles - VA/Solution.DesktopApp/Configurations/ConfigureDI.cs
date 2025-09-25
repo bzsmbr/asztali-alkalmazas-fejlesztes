@@ -20,6 +20,7 @@ public static class ConfigureDI
         builder.Services.AddTransient<IMotorcycleService, MotorcycleService>();
         builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
         builder.Services.AddTransient<ITypeService, TypeService>();
+        builder.Services.AddTransient<TypeListViewModel>();
 
         return builder;
     }

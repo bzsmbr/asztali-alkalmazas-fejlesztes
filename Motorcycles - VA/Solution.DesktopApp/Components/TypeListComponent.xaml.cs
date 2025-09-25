@@ -1,25 +1,25 @@
 namespace Solution.DesktopApp.Components;
 
-public partial class MotorcycleListComponent : ContentView
+public partial class TypeListComponent : ContentView
 {
-    public static readonly BindableProperty MotorcycleProperty = BindableProperty.Create(
-         propertyName: nameof(Motorcycle),
-         returnType: typeof(MotorcycleModel),
-         declaringType: typeof(MotorcycleListComponent),
+    public static readonly BindableProperty TypeProperty = BindableProperty.Create(
+         propertyName: nameof(Type),
+         returnType: typeof(TypeModel),
+         declaringType: typeof(TypeListComponent),
          defaultValue: null,
          defaultBindingMode: BindingMode.OneWay
     );
 
-    public MotorcycleModel Motorcycle
+    public TypeModel Type
     {
-        get => (MotorcycleModel)GetValue(MotorcycleProperty);
-        set => SetValue(MotorcycleProperty, value);
+        get => (TypeModel)GetValue(TypeProperty);
+        set => SetValue(TypeProperty, value);
     }
 
     public static readonly BindableProperty DeleteCommandProperty = BindableProperty.Create(
          propertyName: nameof(DeleteCommand),
          returnType: typeof(IAsyncRelayCommand),
-         declaringType: typeof(MotorcycleListComponent),
+         declaringType: typeof(TypeListComponent),
          defaultValue: null,
          defaultBindingMode: BindingMode.OneWay
     );
@@ -33,7 +33,7 @@ public partial class MotorcycleListComponent : ContentView
     public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
          propertyName: nameof(CommandParameter),
          returnType: typeof(string),
-         declaringType: typeof(MotorcycleListComponent),
+         declaringType: typeof(TypeListComponent),
          defaultValue: null,
          defaultBindingMode: BindingMode.TwoWay
         );
@@ -46,7 +46,7 @@ public partial class MotorcycleListComponent : ContentView
 
     public IAsyncRelayCommand EditCommand => new AsyncRelayCommand(OnEditAsync);
 
-    public MotorcycleListComponent()
+    public TypeListComponent()
 	{
 		InitializeComponent();
 	}
@@ -55,10 +55,10 @@ public partial class MotorcycleListComponent : ContentView
     {
         ShellNavigationQueryParameters navigationQueryParameter = new ShellNavigationQueryParameters
         {
-            { "Motorcycle", this.Motorcycle}
+            { "Type", this.Type}
         };
 
         Shell.Current.ClearNavigationStack();
-        await Shell.Current.GoToAsync(CreateOrEditMotorcycleView.Name, navigationQueryParameter);
+        await Shell.Current.GoToAsync(AddTypeView.Name, navigationQueryParameter);
     }
 }
