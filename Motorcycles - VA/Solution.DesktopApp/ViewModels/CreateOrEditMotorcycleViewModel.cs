@@ -187,7 +187,8 @@ public partial class CreateOrEditMotorcycleViewModel(
 
     private void ClearForm()
     {
-        this.Manufacturer = null;
+        this.Manufacturer = new ManufacturerModel();
+        this.Type = new TypeModel();
         this.Model = null;
         this.Cubic = 0;
         this.ReleaseYear = 0;

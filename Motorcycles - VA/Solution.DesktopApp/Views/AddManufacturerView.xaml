@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
+             x:Class="Solution.DesktopApp.Views.AddManufacturerView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
+             Title="AddManufacturerView">
+    <VerticalStackLayout>
+        <Label 
+            Text="Add Manufacturer"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+
+        <sf:SfTextInputLayout 
+            Hint="Manufacturer"
+            ContainerType="Outlined"
+            OutlineCornerRadius="8"
+            ErrorText="{
+                    Binding ValidationResult,
+                    Converter={StaticResource ValidationResultToErrorMessagesConverter},
+                    ConverterParameter={x:Static validator:ManufacturerModelValidator.NameProperty}
+            }"
+            HasError="{
+                    Binding ValidationResult,
+                    Converter={StaticResource ValidationResultHasErrorConverter},
+                    ConverterParameter={x:Static validator:ManufacturerModelValidator.NameProperty}
+            }">
+
+            <Entry Text="{Binding Name}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="TextChanged"
+                        BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                        Command="{Binding ValidateCommand}"
+                        CommandParameter="{x:Static validator:ManufacturerModelValidator.NameProperty}" />
+                </Entry.Behaviors>
+            </Entry>
+        </sf:SfTextInputLayout>
+
+        <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+    </VerticalStackLayout>
+    
+    
+</ContentPage>

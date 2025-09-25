@@ -8,7 +8,7 @@ public class ManufacturerModelValidator : BaseValidator<ManufacturerModel>
     public static string NameProperty => nameof(ManufacturerModel.Name);
     public static string GlobalProperty => "Global";
 
-    public ManufacturerModelValidator(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public ManufacturerModelValidator(IHttpContextAccessor httpContextAccessor = null) : base(httpContextAccessor)
     {
         if (IsPutMethod)
         {

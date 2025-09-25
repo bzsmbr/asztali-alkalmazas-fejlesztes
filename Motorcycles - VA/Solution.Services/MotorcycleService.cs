@@ -21,10 +21,9 @@ public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
         await dbContext.Motorcycles.AddAsync(motorcycle);
         await dbContext.SaveChangesAsync();
 
-        return new MotorcycleModel(motorcycle)
-        {
-            Manufacturer = model.Manufacturer
-        };
+        model.Id = motorcycle.PublicId;
+
+        return model;
     }
 
     public async Task<ErrorOr<Success>> UpdateAsync(MotorcycleModel model)

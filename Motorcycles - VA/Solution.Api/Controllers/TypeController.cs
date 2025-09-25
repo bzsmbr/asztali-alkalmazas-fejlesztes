@@ -15,8 +15,8 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpGet]
-    [Route("api/type/{id}")]
-    public async Task<IActionResult> GetByIdAsync([FromRoute][Required] string id)
+    [Route("api/type/id/{id}")]
+    public async Task<IActionResult> GetByIdAsync([FromRoute][Required] int id)
     {
         var result = await typeService.GetByIdAsync(id);
 
@@ -27,8 +27,8 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpDelete]
-    [Route("api/type/delete/{id}")]
-    public async Task<IActionResult> DeleteByIdAsync([FromRoute][Required] string id)
+    [Route("api/type/delete/id/{id}")]
+    public async Task<IActionResult> DeleteByIdAsync([FromRoute][Required] int id)
     {
         var result = await typeService.DeleteAsync(id);
 

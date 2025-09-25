@@ -8,7 +8,7 @@ public class TypeModelValidator : BaseValidator<TypeModel>
     public static string NameProperty => nameof(TypeModel.Name);
     public static string GlobalProperty => "Global";
 
-    public TypeModelValidator(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public TypeModelValidator(IHttpContextAccessor httpContextAccessor = null) : base(httpContextAccessor)
     {
         if (IsPutMethod)
         {

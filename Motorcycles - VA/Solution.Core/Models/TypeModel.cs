@@ -34,4 +34,11 @@ public partial class TypeModel : ObservableObject
         entity.Id = Id;
         entity.Name = Name;
     }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is TypeModel model &&
+               this.Id == model.Id &&
+               this.Name == model.Name;
+    }
 }

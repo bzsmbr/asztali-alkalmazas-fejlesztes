@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Solution.DesktopApp.Views.AddTypeView"
+             xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
+             Title="AddTypeView">
+    <VerticalStackLayout>
+        <Label 
+            Text="Add new type"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <sf:SfTextInputLayout 
+            Hint="Type"
+            ContainerType="Outlined"
+            OutlineCornerRadius="8"
+            ErrorText="{
+                    Binding ValidationResult,
+                    Converter={StaticResource ValidationResultToErrorMessagesConverter},
+                    ConverterParameter={x:Static validator:TypeModelValidator.NameProperty}
+            }"
+            HasError="{
+                    Binding ValidationResult,
+                    Converter={StaticResource ValidationResultHasErrorConverter},
+                    ConverterParameter={x:Static validator:TypeModelValidator.NameProperty}
+            }">
+
+            <Entry Text="{Binding Name}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                    EventName="TextChanged"
+                    BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                    Command="{Binding ValidateCommand}"
+                    CommandParameter="{x:Static validator:TypeModelValidator.NameProperty}" />
+                </Entry.Behaviors>
+            </Entry>
+        </sf:SfTextInputLayout>
+
+        <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+        
+    </VerticalStackLayout>
+</ContentPage>

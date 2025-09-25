@@ -73,12 +73,10 @@ public class TypeService(AppDbContext dbContext) : ITypeService
         var paginationModel = new PaginationModel<TypeModel>
         {
             Items = types,
-            Count = await dbContext.Manufacturers.CountAsync()
+            Count = await dbContext.Types.CountAsync()
         };
 
         return paginationModel;
     }
 }
 
-
-}
