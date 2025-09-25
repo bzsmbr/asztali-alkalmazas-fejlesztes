@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Solution.DesktopApp.Components.MotorcycleListComponent"
              x:Name="this">
+    
     <Border Padding="0,10,0,10">
         <Grid Padding="10,0,10,0">
             <Grid.ColumnDefinitions>
