@@ -113,8 +113,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Components\ManufacturerListComponent.xaml.cs">
+	    <DependentUpon>ManufacturerListComponent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Components\TypeListComponent.xaml.cs">
 	    <DependentUpon>TypeListComponent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ManufacturerListView.xaml.cs">
+	    <DependentUpon>ManufacturerListView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\MainView.xaml.cs">
 	    <DependentUpon>MainView.xaml</DependentUpon>
@@ -125,10 +131,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\ManufacturerListComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\TypeListComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\MotorcycleListComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ManufacturerListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\AddManufacturerView.xaml">
