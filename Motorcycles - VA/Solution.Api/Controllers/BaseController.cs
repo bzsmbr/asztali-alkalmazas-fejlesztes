@@ -1,4 +1,6 @@
-﻿namespace Solution.Api.Controllers;
+﻿
+
+namespace Solution.Api.Controllers;
 
 [ApiController]
 public class BaseController : ControllerBase

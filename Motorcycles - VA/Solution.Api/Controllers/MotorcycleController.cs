@@ -1,4 +1,6 @@
-﻿namespace Solution.Api.Controllers;
+﻿using System.Threading.Tasks;
+
+namespace Solution.Api.Controllers;
 
 public class MotorcycleController(IMotorcycleService motorcycleService): BaseController
 {

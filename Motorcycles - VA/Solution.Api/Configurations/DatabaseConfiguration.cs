@@ -1,4 +1,5 @@
-﻿namespace Solution.Api.Configurations;
+﻿
+namespace Solution.Api.Configurations;
 
 public static class DatabaseConfiguration
 {
