@@ -31,8 +31,8 @@ foreach (var book in books) {
 }
 
 //Keressük ki az informatika témajú könyveket és mentsük el őket az informatika.txt állömányba
-Console.WriteLine($"2. feladat (informatika tema): \n");
 var it = fileData.Where(x => x.Contains("informatika"));
+
 await File.WriteAllLinesAsync("informatika.txt", it, encoding: Encoding.UTF8);
 
 
@@ -42,6 +42,29 @@ var booksInThe1900s = books.Where(x => x.ReleaseYear >= 1900)
 
 await File.WriteAllLinesAsync("1900.txt", booksInThe1900s, encoding: Encoding.UTF8);
 
+//Rendezzük az adatokat a könyvek oldalainak száma szerint csökkenő sorrendbe és a sorbarakott.txt állományba mentsük el.
+var sortedBypages = books.OrderByDescending(x => x.NumberOfPages)
+                         .Select(x => x.ToFullyString());
+
+await File.WriteAllLinesAsync("sorbarakott.txt", sortedBypages, encoding: Encoding.UTF8);
+
+//„kategoriak.txt” állományba mentse el a könyveket téma szerint.
+var groupedByTheme = books
+    .GroupBy(b => b.Theme)
+    .OrderBy(g => g.Key);
+
+using (var writer = new StreamWriter("kategoriak.txt", false, Encoding.UTF8))
+{
+    foreach (var group in groupedByTheme)
+    {
+        await writer.WriteLineAsync($"{group.Key}:");
+        foreach (var book in group)
+        {
+            await writer.WriteLineAsync($"\t - {book.Title}");
+        }
+        await writer.WriteLineAsync();
+    }
+}
 
 
 Console.ReadKey();
