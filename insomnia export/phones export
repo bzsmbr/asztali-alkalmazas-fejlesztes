@@ -1,0 +1,513 @@
+type: collection.insomnia.rest/5.0
+name: School
+meta:
+  id: wrk_2c0625b79db24f84bf04cbda283ab043
+  created: 1760512570993
+  modified: 1760513559285
+  description: ""
+collection:
+  - name: Phone
+    meta:
+      id: fld_a71a65a2df9145cb86d8ae28e94bdd28
+      created: 1760512603159
+      modified: 1760512603159
+      sortKey: -1760512603159
+      description: ""
+    children:
+      - url: https://localhost:5000/api/phone/all
+        name: All
+        meta:
+          id: req_6cd4073d6ca8492cb517af95f7f28dfc
+          created: 1760512609358
+          modified: 1760512824544
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609558
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/phone/5e62a294-0278-4d2f-a201-ccfefa1d6d4c
+        name: Id
+        meta:
+          id: req_2880a5e1e28143069691ac5a1b2644f7
+          created: 1760512847875
+          modified: 1760513063375
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609508
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/phone/create
+        name: Create
+        meta:
+          id: req_453915d93a0d482eb09db9db54af918a
+          created: 1760512887713
+          modified: 1760512955441
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609408
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"imageId": null,
+            		"webContentLink": null,
+            		"manufacturer": {
+            			"id": 6,
+            			"name": "Nokia"
+            		},
+            		"type": {
+            			"id": 8,
+            			"name": "Rugged Phones"
+            		},
+            		"model": "noki1",
+            		"releaseYear": 2001,
+            		"storageInGB": 10
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/phone/delete/f80510a0-4b94-4340-8f66-88a79ef5a2fc
+        name: Delete
+        meta:
+          id: req_dff35b78c9194b4296b44cded88924d9
+          created: 1760513001161
+          modified: 1760513093617
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609395.5
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/phone/update
+        name: Update
+        meta:
+          id: req_477d03b3777043c5ab9640545b0dc6c1
+          created: 1760513091200
+          modified: 1760513160455
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609383
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"id":"5e62a294-0278-4d2f-a201-ccfefa1d6d4c",
+            		"imageId": null,
+            		"webContentLink": null,
+            		"manufacturer": {
+            			"id": 6,
+            			"name": "Nokia"
+            		},
+            		"type": {
+            			"id": 8,
+            			"name": "Rugged Phones"
+            		},
+            		"model": "noki1020",
+            		"releaseYear": 2001,
+            		"storageInGB": 10
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/phone/page/1
+        name: Page
+        meta:
+          id: req_1ecc6a00507b4b869e0d67d6afc95dc7
+          created: 1760513188367
+          modified: 1760513210497
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609283
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Type
+    meta:
+      id: fld_64de15b206044eb09a463374c94fb043
+      created: 1760513224430
+      modified: 1760513224430
+      sortKey: -1760512603109
+      description: ""
+    children:
+      - url: https://localhost:5000/api/type/id/4
+        name: Id
+        meta:
+          id: req_0883193caa0745779b04c0de6930f531
+          created: 1760513224431
+          modified: 1760513267544
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609508
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/all
+        name: All
+        meta:
+          id: req_2d837d7432134905933acefbb9c5e464
+          created: 1760513224431
+          modified: 1760513228814
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609558
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/create
+        name: Create
+        meta:
+          id: req_468aa00470cd4e59b2a0ae6add48f8d4
+          created: 1760513224432
+          modified: 1760513284565
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609408
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"name":"proba"
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/delete/id/11
+        name: Delete
+        meta:
+          id: req_f6853ad1c0e14bb98d181aa54731cb74
+          created: 1760513224432
+          modified: 1760513309354
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609395.5
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/page/1
+        name: Page
+        meta:
+          id: req_4d8e5b6e9f6741c688a9facda5320a96
+          created: 1760513224433
+          modified: 1760513366916
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609283
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/update
+        name: Update
+        meta:
+          id: req_fa92b75dee854a77859c36b85a41ad99
+          created: 1760513224433
+          modified: 1760513354739
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609383
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"id":6,
+            		"name":"csere"
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Manufacturer
+    meta:
+      id: fld_c90b3c2d31f8499c9fbb7460316b2298
+      created: 1760513382426
+      modified: 1760513382426
+      sortKey: -1760512603059
+      description: ""
+    children:
+      - url: https://localhost:5000/api/manufacturer/id/8
+        name: Id
+        meta:
+          id: req_2964ad0b25bd4629b7ebb00526bb1b78
+          created: 1760513382427
+          modified: 1760513412647
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609508
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/manufacturer/all
+        name: All
+        meta:
+          id: req_823c0a4d25ea4001915e58225f2770ef
+          created: 1760513382428
+          modified: 1760513392342
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609558
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/type/delete/id/8
+        name: Delete
+        meta:
+          id: req_b1c939f9f8c94c6691fb46dd22a87507
+          created: 1760513382429
+          modified: 1760513418933
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609395.5
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: ""
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/manufacturer/create
+        name: Create
+        meta:
+          id: req_fa6c790e570e40b486daf61f57f3f327
+          created: 1760513382429
+          modified: 1760513404008
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609408
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"name":"proba"
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/manufacturer/update
+        name: Update
+        meta:
+          id: req_3caefda57b0b449285098664693ccc05
+          created: 1760513382430
+          modified: 1760513453860
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609383
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            	{
+            		"id":6,
+            		"name":"nokia1"
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: https://localhost:5000/api/manufacturer/page/1
+        name: Page
+        meta:
+          id: req_3e7f04eb56894c75b7c76fdc1502e397
+          created: 1760513382430
+          modified: 1760513490903
+          isPrivate: false
+          description: ""
+          sortKey: -1760512609283
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f47387c945b05e696b5deade037035d62d540b2e
+    created: 1760512570997
+    modified: 1760512570997
+environments:
+  name: Base Environment
+  meta:
+    id: env_f47387c945b05e696b5deade037035d62d540b2e
+    created: 1760512570995
+    modified: 1760512570995
+    isPrivate: false
