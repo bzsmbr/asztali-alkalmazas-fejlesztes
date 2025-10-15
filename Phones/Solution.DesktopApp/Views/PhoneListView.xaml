@@ -41,7 +41,6 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
@@ -64,14 +63,18 @@
                                Style="{x:StaticResource TableHeader}" />
                         <Label Grid.Column="4"
                                Text="Release Year"
-                               HorizontalTextAlignment="End"
+                               HorizontalTextAlignment="Center"
                                Style="{x:StaticResource TableHeader}" />
                         <Label Grid.Column="5"
-                               Text="Storage In Gb Property"
-                               HorizontalTextAlignment="End"
+                               Text="Storage In Gb"
+                               HorizontalTextAlignment="Center"
                                Style="{x:StaticResource TableHeader}" />
                         <Label Grid.Column="6"
-                               Text="Storage in GB"
+                               Text="Edit"
+                               HorizontalTextAlignment="End"
+                               Style="{x:StaticResource TableHeader}" />
+                        <Label Grid.Column="7"
+                               Text="Delete"
                                HorizontalTextAlignment="End"
                                Style="{x:StaticResource TableHeader}" />
                     </Grid>

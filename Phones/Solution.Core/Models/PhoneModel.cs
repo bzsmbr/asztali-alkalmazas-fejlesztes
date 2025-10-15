@@ -31,7 +31,7 @@ public partial class PhoneModel: ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("storageInGB")]
-    private List<int?> storageInGB;
+    private int? storageInGB;
 
     public PhoneModel()
     {
@@ -46,23 +46,20 @@ public partial class PhoneModel: ObservableObject
         this.Type = new TypeModel(entity.Type);
         this.Model = entity.Model;
         this.ReleaseYear = entity.ReleaseYear;
-        this.storageInGB = entity.storageInGB;
+        this.StorageInGB = entity.StorageInGB;
     }
-
-    public object StorageInGBphone { get; set; }
 
     public PhoneEntity ToEntity()
     {
         return new PhoneEntity
         {
-            PublicId = Id,
             ManufacturerId = Manufacturer.Id,
             TypeId = Type.Id,
             ImageId = ImageId,
             WebContentLink = WebContentLink,
             Model = Model,
             ReleaseYear = ReleaseYear.Value,
-            storageInGB = storageInGB.Value
+            StorageInGB = StorageInGB.Value
         };
     }
 
@@ -75,6 +72,6 @@ public partial class PhoneModel: ObservableObject
         entity.WebContentLink = WebContentLink;
         entity.Model = Model;
         entity.ReleaseYear = ReleaseYear.Value;
-        entity.storageInGB = storageInGB.Value;
+        entity.StorageInGB = StorageInGB.Value;
     }
 }

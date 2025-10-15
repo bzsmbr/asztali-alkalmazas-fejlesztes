@@ -38,8 +38,8 @@ public partial class CreateOrEditPhoneViewModel(
     [ObservableProperty]
     private IList<TypeModel> types = [];
 
-    [ObservableProperty]
-    private IList<int> storageInGB = [64, 128, 256, 512, 1024, 2048];
+    //[ObservableProperty]
+    //private IList<int> storageInGB = [64, 128, 256, 512, 1024, 2048];
 
     [ObservableProperty]
     private ImageSource image;

@@ -17,7 +17,7 @@ public class PhoneController(IPhoneService phoneService): BaseController
     }
 
     [HttpGet]
-    [Route("api/phone/{id}")]
+    [Route("api/phone/id/{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute] [Required] string id)
     {
         var result = await phoneService.GetByIdAsync(id);

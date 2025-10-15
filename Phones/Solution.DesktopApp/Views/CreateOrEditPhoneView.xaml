@@ -138,7 +138,7 @@
                     ConverterParameter={x:Static validator:PhoneModelValidator.StorageInGbProperty}
                 }">
                 <editors:SfNumericEntry
-                    Value="{Binding StorageInGbProperty}"
+                    Value="{Binding StorageInGB}"
                     ShowClearButton="True"
                     CustomFormat="N0">
                     <editors:SfNumericEntry.Behaviors>

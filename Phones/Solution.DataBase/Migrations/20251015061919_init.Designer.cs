@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solution.DataBase;
 
@@ -10,9 +11,11 @@ using Solution.DataBase;
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251015061919_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace Solution.Database.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Manufacturer", (string)null);
+                    b.ToTable("Manufacturer");
                 });
 
             modelBuilder.Entity("Solution.Database.Entities.PhoneEntity", b =>
@@ -89,7 +92,7 @@ namespace Solution.Database.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Phone", (string)null);
+                    b.ToTable("Phone");
                 });
 
             modelBuilder.Entity("Solution.Database.Entities.TypeEntity", b =>
@@ -110,7 +113,7 @@ namespace Solution.Database.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Type", (string)null);
+                    b.ToTable("Type");
                 });
 
             modelBuilder.Entity("Solution.Database.Entities.PhoneEntity", b =>

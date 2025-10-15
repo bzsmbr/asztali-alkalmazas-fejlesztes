@@ -1,6 +1,3 @@
-using Solution.Core.Models;
-using Solution.Database.Migrations;
-
 namespace Solution.DesktopApp.Components;
 
 public partial class ManufacturerListComponent : ContentView
@@ -14,7 +11,7 @@ public partial class ManufacturerListComponent : ContentView
     );
 
     public ManufacturerModel Manufacturer
-    { 
+    {
         get => (ManufacturerModel)GetValue(ManufacturerProperty);
         set => SetValue(ManufacturerProperty, value);
     }

@@ -3,7 +3,6 @@
 [Table("Phone")]
 public class PhoneEntity
 {
-    public int? storageInGB;
 
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,7 +26,7 @@ public class PhoneEntity
     public int ReleaseYear { get; set; }
 
     [Required]
-    public List<int> StorageInGB { get; set; }
+    public int? StorageInGB { get; set; }
 
     [ForeignKey("Manufacturer")]
     public int ManufacturerId { get; set; }

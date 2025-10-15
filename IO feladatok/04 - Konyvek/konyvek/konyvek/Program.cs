@@ -66,5 +66,18 @@ using (var writer = new StreamWriter("kategoriak.txt", false, Encoding.UTF8))
     }
 }
 
+var groupByTheme2 = books
+    .GroupBy(b => b.Theme)
+    .ToDictionary(g => g.Key, v => v.ToList());
+var stringBuilder = new StringBuilder();
+
+foreach (var group in groupedByTheme) {
+    stringBuilder.AppendLine($"{group.Key}:");
+    foreach (var book in group) {
+        stringBuilder.AppendLine($"\t - {book.Title}");
+    }
+};
+
+await File.WriteAllTextAsync("kategoriak2.txt", stringBuilder.ToString() , Encoding.UTF8);
 
 Console.ReadKey();
