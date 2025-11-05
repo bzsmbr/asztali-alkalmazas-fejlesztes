@@ -35,18 +35,17 @@ var groupedByTeam = players
     .GroupBy(b => b.Team)
     .OrderBy(g => g.Key);
 
-using (var writer = new StreamWriter("csapattagok.txt", false, Encoding.UTF8))
+using (StreamWriter writer = new StreamWriter("csapattagok.txt", false, Encoding.UTF8))
+foreach (var group in groupedByTeam)
 {
-    foreach (var group in groupedByTeam)
+    await writer.WriteAsync($"{group.Key}: ");
+    foreach (var player in group)
     {
-        await writer.WriteAsync($"{group.Key}: ");
-        foreach (var player in group)
-        {
-            await writer.WriteAsync($"{player.Name}, ");
-        }
-        await writer.WriteLineAsync();
+        await writer.WriteAsync($"{player.Name}, ");
     }
+    await writer.WriteLineAsync();
 }
+
 
 //Rendezzük a játékosokat magasság szerint növekvő sorrendbe és a magaslatok.txt állományba mentsük el.
 var highs = players.OrderBy(x => x.Height).Select(x => x.ToString());
@@ -74,14 +73,15 @@ using (var writer = new StreamWriter("nemzetisegek.txt", false, Encoding.UTF8))
 //atlagnalmagasabbak.txt állományba keressük azon játékosok nevét és magasságát akik magasabbak mint az „adatbázisban” szereplő játékosok átlagos magasságánál.
 var sumOfHeights = 0;
 var numberOfPlayers = 0;
-
+/*
 foreach (var player in players) 
 { 
     sumOfHeights += player.Height;
     numberOfPlayers++;
 }
-
 var averageHeight = sumOfHeights / numberOfPlayers;
+*/
+var averageHeight = players.Average(x => x.Height);
 
 var playersHigherThanAverage = players.Where(x => x.Height >= averageHeight).Select(x => x.ToString());
 
