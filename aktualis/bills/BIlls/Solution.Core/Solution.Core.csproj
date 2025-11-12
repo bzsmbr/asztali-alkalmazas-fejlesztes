@@ -63,7 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Solution.Database\Solution.Database.csproj" />
   </ItemGroup>
 
 </Project>

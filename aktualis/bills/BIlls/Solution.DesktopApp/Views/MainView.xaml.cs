@@ -1,4 +1,6 @@
-﻿namespace Solution.DesktopApp;
+﻿using Solution.DesktopApp.ViewModels;
+
+namespace Solution.DesktopApp;
 
 public partial class MainView : ContentPage
 {
