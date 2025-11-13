@@ -1,4 +1,6 @@
-﻿namespace Solution.Api.Configurations;
+﻿using Solution.Services;
+
+namespace Solution.Api.Configurations;
 
 public static class DIConfigurations
 {

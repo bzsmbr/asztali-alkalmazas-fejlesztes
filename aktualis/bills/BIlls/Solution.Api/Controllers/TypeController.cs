@@ -2,13 +2,13 @@
 
 namespace Solution.Api.Controllers;
 
-public class TypeController(ITypeService typeService) : BaseController
+public class TypeController(IItemService itemService) : BaseController
 {
     [HttpGet]
-    [Route("api/type/all")]
+    [Route("api/item/all")]
     public async Task<IActionResult> GetAllAsync()
     {
-        var result = await typeService.GetAllAsync();
+        var result = await itemService.GetAllAsync();
 
         return result.Match(
             result => Ok(result),
@@ -17,10 +17,10 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpGet]
-    [Route("api/type/id/{id}")]
+    [Route("api/item/id/{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute][Required] int id)
     {
-        var result = await typeService.GetByIdAsync(id);
+        var result = await itemService.GetByIdAsync(id);
 
         return result.Match(
             result => Ok(result),
@@ -29,10 +29,10 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpDelete]
-    [Route("api/type/delete/id/{id}")]
+    [Route("api/item/delete/id/{id}")]
     public async Task<IActionResult> DeleteByIdAsync([FromRoute][Required] int id)
     {
-        var result = await typeService.DeleteAsync(id);
+        var result = await itemService.DeleteAsync(id);
 
         return result.Match(
             result => Ok(new OkResult()),
@@ -41,10 +41,10 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpPost]
-    [Route("api/type/create")]
-    public async Task<IActionResult> CreateAsync([FromBody][Required] TypeModel model)
+    [Route("api/item/create")]
+    public async Task<IActionResult> CreateAsync([FromBody][Required] ItemModel model)
     {
-        var result = await typeService.CreateAsync(model);
+        var result = await itemService.CreateAsync(model);
 
         return result.Match(
             result => Ok(result),
@@ -53,10 +53,10 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpPut]
-    [Route("api/type/update")]
-    public async Task<IActionResult> UpdateAsync([FromBody][Required] TypeModel model)
+    [Route("api/item/update")]
+    public async Task<IActionResult> UpdateAsync([FromBody][Required] ItemModel model)
     {
-        var result = await typeService.UpdateAsync(model);
+        var result = await itemService.UpdateAsync(model);
 
         return result.Match(
             result => Ok(new OkResult()),
@@ -65,10 +65,10 @@ public class TypeController(ITypeService typeService) : BaseController
     }
 
     [HttpGet]
-    [Route("api/type/page/{page}")]
+    [Route("api/item/page/{page}")]
     public async Task<IActionResult> GetPageAsync([FromRoute] int page = 0)
     {
-        var result = await typeService.GetPagedAsync(page);
+        var result = await itemService.GetPagedAsync(page);
 
         return result.Match(
             result => Ok(result),

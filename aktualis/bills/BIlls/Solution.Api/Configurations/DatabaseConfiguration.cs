@@ -11,7 +11,7 @@ public static class DatabaseConfiguration
             options.UseLazyLoadingProxies()
                    .UseSqlServer(connectionString, options =>
                    {
-                       options.MigrationsAssembly(Solution.Database.AssemblyReference.Assembly);
+                       options.MigrationsAssembly(Validators.AssemblyReference.Assembly);
                        options.EnableRetryOnFailure();
                        options.CommandTimeout(300);
                    })

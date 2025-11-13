@@ -63,4 +63,9 @@
     <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="9.104.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Solution.Core\Solution.Core.csproj" />
+    <ProjectReference Include="..\Solution.Database\Solution.Database.csproj" />
+  </ItemGroup>
+
 </Project>
