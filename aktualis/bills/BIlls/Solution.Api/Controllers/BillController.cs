@@ -41,7 +41,7 @@ public class BillController(IBillService billService) : BaseController
     }
 
     [HttpPost]
-    [Route("api/item/create")]
+    [Route("api/bill/create")]
     public async Task<IActionResult> CreateAsync([FromBody][Required] BillModel model)
     {
         var result = await billService.CreateAsync(model);

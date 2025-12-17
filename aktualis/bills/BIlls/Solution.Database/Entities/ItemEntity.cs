@@ -22,5 +22,8 @@ public class ItemEntity
     [Required]
     public int Quantity { get; set; }
 
-    public virtual ICollection<BillEntity> Bills { get; set; }
+    [Required]
+    [ForeignKey("Bill")]
+    public int BillId { get; set; }
+    public virtual BillEntity Bill { get; set; }
 }

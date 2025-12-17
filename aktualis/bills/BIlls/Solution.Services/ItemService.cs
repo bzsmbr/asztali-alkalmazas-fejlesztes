@@ -28,8 +28,7 @@ public class ItemService(AppDbContext dbContext) : IItemService
     {
         var result = await dbContext.Items.AsNoTracking()
                                                 .Where(x => x.Id == model.Id)
-                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Id, model.Id)
-                                                                          .SetProperty(p => p.Name, model.Name)
+                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, model.Name)
                                                                           .SetProperty(p => p.UnitPrice, model.UnitPrice)
                                                                           .SetProperty(p => p.Quantity, model.Quantity));
         return result > 0 ? Result.Success : Error.NotFound();

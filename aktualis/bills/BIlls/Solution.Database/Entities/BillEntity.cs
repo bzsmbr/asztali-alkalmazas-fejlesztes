@@ -18,8 +18,6 @@ public class BillEntity
     [Required]
     public DateTime IssueDate { get; set; }
 
-    [ForeignKey("Item")]
-    public int ItemId { get; set; }
+    public virtual ICollection<ItemEntity> Items { get; set; }
 
-    public virtual BillEntity Item { get; set; }
 }

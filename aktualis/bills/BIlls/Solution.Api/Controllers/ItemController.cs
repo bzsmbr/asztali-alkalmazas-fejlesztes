@@ -2,7 +2,7 @@
 
 namespace Solution.Api.Controllers;
 
-public class TypeController(IItemService itemService) : BaseController
+public class ItemController(IItemService itemService) : BaseController
 {
     [HttpGet]
     [Route("api/item/all")]
@@ -56,7 +56,7 @@ public class TypeController(IItemService itemService) : BaseController
     [Route("api/item/update")]
     public async Task<IActionResult> UpdateAsync([FromBody][Required] ItemModel model)
     {
-        var result = await itemService.UpdateAsync(model);
+        var  result = await itemService.UpdateAsync(model);
 
         return result.Match(
             result => Ok(new OkResult()),

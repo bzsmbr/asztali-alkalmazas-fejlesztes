@@ -5,10 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Solution.Database.Migrations
 {
-    public partial class init : Migration
+    /// <inheritdoc />
+    public partial class fix : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Bill",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BillNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bill", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Item",
                 columns: table => new
@@ -17,38 +33,24 @@ namespace Solution.Database.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     UnitPrice = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    BillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Item", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bill",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BillNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bill", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bill_Item_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Item",
+                        name: "FK_Item_Bill_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bill",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict); // Avoid cascade to prevent multiple paths
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bill_ItemId",
-                table: "Bill",
-                column: "ItemId");
+                name: "IX_Item_BillId",
+                table: "Item",
+                column: "BillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Item_Name",
@@ -57,13 +59,14 @@ namespace Solution.Database.Migrations
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bill");
+                name: "Item");
 
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "Bill");
         }
     }
 }

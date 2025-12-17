@@ -13,6 +13,7 @@ public class BillService(AppDbContext dbContext) : IBillService
             return Error.Conflict(description: "Bill already exists!");
         }
 
+
         var bill = model.ToEntity();
         
         await dbContext.Bills.AddAsync(bill);
@@ -24,9 +25,9 @@ public class BillService(AppDbContext dbContext) : IBillService
     public async Task<ErrorOr<Success>> UpdateAsync(BillModel model)
     {
         var result = await dbContext.Bills.AsNoTracking()
+                                                .Include(x => x.Items)
                                                 .Where(x => x.Id == model.Id)
-                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Id, model.Id)
-                                                                          .SetProperty(p => p.BillNumber, model.BillNumber)
+                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.BillNumber, model.BillNumber)
                                                                           .SetProperty(p => p.IssueDate, model.IssueDate));
         return result > 0 ? Result.Success : Error.NotFound();
     }
@@ -34,7 +35,7 @@ public class BillService(AppDbContext dbContext) : IBillService
     public async Task<ErrorOr<Success>> DeleteAsync(int billId)
     {
         var result = await dbContext.Bills.AsNoTracking()
-                                                .Include(x => x.Item)
+                                                .Include(x => x.Items)
                                                 .Where(x => x.Id == billId)
                                                 .ExecuteDeleteAsync();
 
@@ -43,7 +44,7 @@ public class BillService(AppDbContext dbContext) : IBillService
 
     public async Task<ErrorOr<BillModel>> GetByIdAsync(int billId)
     {
-        var bill = await dbContext.Bills.Include(x => x.Item)
+        var bill = await dbContext.Bills.Include(x => x.Items)
                                                     .FirstOrDefaultAsync(x => x.Id == billId);
 
         if (bill is null)
@@ -56,7 +57,7 @@ public class BillService(AppDbContext dbContext) : IBillService
 
     public async Task<ErrorOr<List<BillModel>>> GetAllAsync() =>
         await dbContext.Bills.AsNoTracking()
-                                   .Include(x => x.Item)
+                                   .Include(x => x.Items)
                                    .Select(x => new BillModel(x))
                                    .ToListAsync();
 
@@ -65,7 +66,7 @@ public class BillService(AppDbContext dbContext) : IBillService
         page = page <= 0 ? 1 : page - 1;
 
         var bills = await dbContext.Bills.AsNoTracking()
-                                                     .Include(x => x.Item)
+                                                     .Include(x => x.Items)
                                                      .Skip(page * ROW_COUNT)
                                                      .Take(ROW_COUNT)
                                                      .Select(x => new BillModel(x))

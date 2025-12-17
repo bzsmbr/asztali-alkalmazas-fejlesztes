@@ -12,8 +12,8 @@ using Solution.DataBase;
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251113075034_init")]
-    partial class init
+    [Migration("20251217080136_fix")]
+    partial class fix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,17 +44,7 @@ namespace Solution.Database.Migrations
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ItemEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemEntityId");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("Bill");
                 });
@@ -66,6 +56,9 @@ namespace Solution.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -80,30 +73,28 @@ namespace Solution.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BillId");
+
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
                 {
-                    b.HasOne("Solution.Database.Entities.ItemEntity", null)
-                        .WithMany("Bills")
-                        .HasForeignKey("ItemEntityId");
-
-                    b.HasOne("Solution.Database.Entities.BillEntity", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
+                    b.HasOne("Solution.Database.Entities.BillEntity", "Bill")
+                        .WithMany("Items")
+                        .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Item");
+                    b.Navigation("Bill");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
+            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
                 {
-                    b.Navigation("Bills");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

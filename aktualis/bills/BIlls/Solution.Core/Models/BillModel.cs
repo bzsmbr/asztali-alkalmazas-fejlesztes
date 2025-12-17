@@ -1,4 +1,7 @@
-﻿namespace Solution.Core.Models;
+﻿using System.Collections.ObjectModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Solution.Core.Models;
 
 public partial class BillModel : ObservableObject
 {
@@ -15,11 +18,15 @@ public partial class BillModel : ObservableObject
     private DateTime issueDate;
 
     [ObservableProperty]
-    [JsonPropertyName("")]
-    private ItemModel item;
+    [JsonPropertyName("items")]
+    private ObservableCollection<ItemModel>? items;
 
     public BillModel()
     {
+        this.Id = id;
+        this.billNumber = BillNumber;
+        this.issueDate = IssueDate;
+        this.Items = items;
     }
 
     public BillModel(BillEntity entity)
@@ -27,6 +34,9 @@ public partial class BillModel : ObservableObject
         this.Id = entity.Id;
         this.billNumber = entity.BillNumber;
         this.issueDate = entity.IssueDate;
+        this.Items = new ObservableCollection<ItemModel>(
+                entity.Items?.Select(x => new ItemModel(x))
+        );
     }
 
     public BillEntity ToEntity()
@@ -36,7 +46,7 @@ public partial class BillModel : ObservableObject
             Id = Id,
             BillNumber = BillNumber,
             IssueDate = IssueDate,
-            ItemId = Item.Id,
+            Items = this.Items?.Select(x => x.ToEntity()).ToList()
         };
     }
 
@@ -45,6 +55,6 @@ public partial class BillModel : ObservableObject
         entity.Id = Id;
         entity.BillNumber = BillNumber;
         entity.IssueDate = IssueDate;
-        entity.ItemId = Item.Id;
+        entity.Items = this.Items?.Select(x => x.ToEntity()) as ICollection<ItemEntity>;
     }
 }

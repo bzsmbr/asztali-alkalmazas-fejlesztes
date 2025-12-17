@@ -41,19 +41,9 @@ namespace Solution.Database.Migrations
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ItemEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemEntityId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("Bill", (string)null);
+                    b.ToTable("Bill");
                 });
 
             modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
@@ -63,6 +53,9 @@ namespace Solution.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -77,30 +70,28 @@ namespace Solution.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BillId");
+
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Item", (string)null);
-                });
-
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
-                {
-                    b.HasOne("Solution.Database.Entities.ItemEntity", null)
-                        .WithMany("Bills")
-                        .HasForeignKey("ItemEntityId");
-
-                    b.HasOne("Solution.Database.Entities.BillEntity", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
                 {
-                    b.Navigation("Bills");
+                    b.HasOne("Solution.Database.Entities.BillEntity", "Bill")
+                        .WithMany("Items")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+                });
+
+            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
