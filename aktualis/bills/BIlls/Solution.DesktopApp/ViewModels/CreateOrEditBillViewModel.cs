@@ -1,13 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Bills.Core.Interfaces;
+using Bills.Core.Models;
+using Bills.Validators;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
-using Solution.Core.Interfaces;
-using Solution.Core.Models;
 using Solution.DataBase;
-using Solution.Validators;
 using System.Windows.Input;
-using FluentValidation;
 
 namespace Solution.DesktopApp.ViewModels;
 
@@ -41,7 +41,7 @@ public partial class CreateOrEditBillViewModel(
 
     [ObservableProperty]
     private IList<ItemModel> items = [];
-    
+
     private FileResult selectedFile = null;
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -50,7 +50,7 @@ public partial class CreateOrEditBillViewModel(
 
         bool hasValue = query.TryGetValue("Bill", out object result);
 
-        if(!hasValue)
+        if (!hasValue)
         {
             asyncButtonAction = OnSaveAsync;
             Title = "Add new bill";
@@ -60,8 +60,8 @@ public partial class CreateOrEditBillViewModel(
         BillModel bill = result as BillModel;
 
         this.Id = bill.Id;
-        this.BillNumber = bill.BillNumber;
-        this.IssueDate = bill.IssueDate;
+        this.Number = bill.Number;
+        this.Date = bill.Date;
 
         asyncButtonAction = OnUpdateAsync;
         Title = "Update bill";
@@ -123,8 +123,8 @@ public partial class CreateOrEditBillViewModel(
 
     private void ClearForm()
     {
-        this.IssueDate = DateTime.Now;
-        this.BillNumber = null;
+        this.Date = DateTime.Now;
+        this.Number = null;
     }
 
     private async void OnValidateAsync(string propertyName)

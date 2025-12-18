@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Solution.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class fix : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,8 @@ namespace Solution.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BillNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,8 +32,8 @@ namespace Solution.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    UnitPrice = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
                     BillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -51,12 +51,6 @@ namespace Solution.Database.Migrations
                 name: "IX_Item_BillId",
                 table: "Item",
                 column: "BillId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_Name",
-                table: "Item",
-                column: "Name",
-                unique: true);
         }
 
         /// <inheritdoc />

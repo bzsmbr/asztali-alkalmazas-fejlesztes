@@ -1,77 +1,69 @@
-﻿
+﻿using Bills.Core.DTO.Requests;
+using Bills.Core.Interfaces;
+using Bills.Core.Models;
+using Solution.Api.Controllers;
+using System.ComponentModel.DataAnnotations;
 
-namespace Solution.Api.Controllers;
+namespace Bills.Api.Controllers;
 
 public class ItemController(IItemService itemService) : BaseController
 {
+    //ALL
     [HttpGet]
-    [Route("api/item/all")]
+    [Route("api/items/all")]
     public async Task<IActionResult> GetAllAsync()
     {
         var result = await itemService.GetAllAsync();
-
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)
         );
     }
 
+    //BY ID
     [HttpGet]
-    [Route("api/item/id/{id}")]
+    [Route("api/items/id/{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute][Required] int id)
     {
         var result = await itemService.GetByIdAsync(id);
-
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)
         );
     }
 
-    [HttpDelete]
-    [Route("api/item/delete/id/{id}")]
-    public async Task<IActionResult> DeleteByIdAsync([FromRoute][Required] int id)
-    {
-        var result = await itemService.DeleteAsync(id);
-
-        return result.Match(
-            result => Ok(new OkResult()),
-            errors => Problem(errors)
-        );
-    }
-
+    //CREATE
     [HttpPost]
-    [Route("api/item/create")]
-    public async Task<IActionResult> CreateAsync([FromBody][Required] ItemModel model)
+    [Route("api/items/create")]
+    public async Task<IActionResult> CreateAsync([FromBody][Required] ItemModelRequest item)
     {
-        var result = await itemService.CreateAsync(model);
-
+        var result = await itemService.CreateAsync(item);
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)
         );
     }
 
+    //UPDATE
     [HttpPut]
-    [Route("api/item/update")]
-    public async Task<IActionResult> UpdateAsync([FromBody][Required] ItemModel model)
+    [Route("api/items/update")]
+    public async Task<IActionResult> UpdateAsync([FromBody][Required] ItemModelRequest item)
     {
-        var  result = await itemService.UpdateAsync(model);
-
+        var result = await itemService.UpdateAsync(item);
         return result.Match(
-            result => Ok(new OkResult()),
+            result => Ok(result),
             errors => Problem(errors)
         );
     }
 
-    [HttpGet]
-    [Route("api/item/page/{page}")]
-    public async Task<IActionResult> GetPageAsync([FromRoute] int page = 0)
+    //DELETE
+    [HttpDelete]
+    [Route("api/items/delete")]
+    public async Task<IActionResult> DeleteAsync([FromBody][Required] ItemModelRequest item)
     {
-        var result = await itemService.GetPagedAsync(page);
-
+        var result = await itemService.DeleteAsync(item);
         return result.Match(
-            result => Ok(result),
+            result => Accepted(),
             errors => Problem(errors)
         );
     }

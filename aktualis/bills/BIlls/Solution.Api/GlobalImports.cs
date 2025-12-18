@@ -9,8 +9,6 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Solution.Api.Configurations;
-global using Solution.Core.Interfaces;
-global using Solution.Core.Models;
 global using Solution.Core.Models.Keys;
 global using Solution.DataBase;
 global using System.Collections.Generic;

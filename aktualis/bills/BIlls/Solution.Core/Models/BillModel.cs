@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using Bills.Database.Entities;
+using System.Collections.ObjectModel;
 
-namespace Solution.Core.Models;
-
+namespace Bills.Core.Models;
 public partial class BillModel : ObservableObject
 {
     [ObservableProperty]
@@ -10,32 +9,34 @@ public partial class BillModel : ObservableObject
     private int id;
 
     [ObservableProperty]
-    [JsonPropertyName("billNumber")]
-    private string billNumber;
+    [JsonPropertyName("number")]
+    private string number;
 
     [ObservableProperty]
-    [JsonPropertyName("issueDate")]
-    private DateTime issueDate;
+    [JsonPropertyName("date")]
+    private DateTime date = DateTime.Now;
 
     [ObservableProperty]
     [JsonPropertyName("items")]
     private ObservableCollection<ItemModel>? items;
 
+    public double? Total => Items?.Sum(x => x.Total);
+
     public BillModel()
     {
         this.Id = id;
-        this.billNumber = BillNumber;
-        this.issueDate = IssueDate;
+        this.Number = number;
+        this.Date = date;
         this.Items = items;
     }
 
     public BillModel(BillEntity entity)
     {
         this.Id = entity.Id;
-        this.billNumber = entity.BillNumber;
-        this.issueDate = entity.IssueDate;
+        this.Number = entity.Number;
+        this.Date = entity.Date;
         this.Items = new ObservableCollection<ItemModel>(
-                entity.Items?.Select(x => new ItemModel(x))
+            entity.Items?.Select(x => new ItemModel(x))
         );
     }
 
@@ -43,18 +44,18 @@ public partial class BillModel : ObservableObject
     {
         return new BillEntity
         {
-            Id = Id,
-            BillNumber = BillNumber,
-            IssueDate = IssueDate,
+            Id = this.Id,
+            Number = this.Number,
+            Date = this.Date,
             Items = this.Items?.Select(x => x.ToEntity()).ToList()
         };
     }
 
     public void ToEntity(BillEntity entity)
     {
-        entity.Id = Id;
-        entity.BillNumber = BillNumber;
-        entity.IssueDate = IssueDate;
+        entity.Id = this.Id;
+        entity.Number = this.Number;
+        entity.Date = this.Date;
         entity.Items = this.Items?.Select(x => x.ToEntity()) as ICollection<ItemEntity>;
     }
 }

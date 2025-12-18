@@ -12,8 +12,8 @@ using Solution.DataBase;
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251217080136_fix")]
-    partial class fix
+    [Migration("20251218064017_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace Solution.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.BillEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,26 +36,28 @@ namespace Solution.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BillNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("IssueDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Bill");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.ItemEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int>("BillId")
                         .HasColumnType("int");
@@ -65,25 +67,19 @@ namespace Solution.Database.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UnitPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.ItemEntity", b =>
                 {
-                    b.HasOne("Solution.Database.Entities.BillEntity", "Bill")
+                    b.HasOne("Bills.Database.Entities.BillEntity", "Bill")
                         .WithMany("Items")
                         .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -92,7 +88,7 @@ namespace Solution.Database.Migrations
                     b.Navigation("Bill");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.BillEntity", b =>
                 {
                     b.Navigation("Items");
                 });

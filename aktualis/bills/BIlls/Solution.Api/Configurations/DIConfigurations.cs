@@ -1,4 +1,5 @@
-﻿using Solution.Services;
+﻿using Bills.Core.Interfaces;
+using Bills.Services;
 
 namespace Solution.Api.Configurations;
 

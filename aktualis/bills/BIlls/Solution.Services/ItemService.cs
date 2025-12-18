@@ -1,81 +1,65 @@
-﻿namespace Solution.Services;
+﻿using Bills.Core.DTO.Requests;
+using Bills.Core.Interfaces;
+using Bills.Core.Models;
 
+namespace Bills.Services;
 public class ItemService(AppDbContext dbContext) : IItemService
 {
-    private const int ROW_COUNT = 10;
-
-    public async Task<ErrorOr<ItemModel>> CreateAsync(ItemModel model)
+    public async Task<ErrorOr<ItemModel>> CreateAsync(ItemModelRequest item)
     {
-        bool exists = await dbContext.Items.AnyAsync(x => x.Name == model.Name &&
-                                                          x.UnitPrice == model.UnitPrice &&
-                                                          x.Quantity == model.Quantity);
+        var newItem = item.ToEntity();
 
-
-        if (exists)
-        {
-            return Error.Conflict(description: "Item already exists!");
-        }
-
-        var item = model.ToEntity();
-        
-        await dbContext.Items.AddAsync(item);
+        await dbContext.Items.AddAsync(newItem);
         await dbContext.SaveChangesAsync();
 
-        return model;
+        return new ItemModel(newItem);
     }
 
-    public async Task<ErrorOr<Success>> UpdateAsync(ItemModel model)
+    public async Task<ErrorOr<Success>> DeleteAsync(ItemModel item)
     {
-        var result = await dbContext.Items.AsNoTracking()
-                                                .Where(x => x.Id == model.Id)
-                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, model.Name)
-                                                                          .SetProperty(p => p.UnitPrice, model.UnitPrice)
-                                                                          .SetProperty(p => p.Quantity, model.Quantity));
-        return result > 0 ? Result.Success : Error.NotFound();
-    }
+        var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == item.Id);
 
-    public async Task<ErrorOr<Success>> DeleteAsync(int itemId)
-    {
-        var result = await dbContext.Items.AsNoTracking()
-                                                .Where(x => x.Id == itemId)
-                                                .ExecuteDeleteAsync();
-
-        return result > 0 ? Result.Success : Error.NotFound();
-    }
-
-    public async Task<ErrorOr<ItemModel>> GetByIdAsync(int itemId)
-    {
-        var item = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == itemId);
-
-        if (item is null)
+        if (existingItem is null)
         {
-            return Error.NotFound(description: "Item not found.");
+            return Error.NotFound(description: "Item not found!");
         }
 
+        var result = await dbContext.Items.AsNoTracking()
+                                          .Where(x => x == item.ToEntity())
+                                          .ExecuteDeleteAsync();
+
+        return result > 0 ? Result.Success : Error.NotFound();
+    }
+
+    public async Task<ErrorOr<List<ItemModel>>> GetAllAsync() => await dbContext.Items.Select(x => new ItemModel(x))
+                                                                                      .ToListAsync();
+
+
+    public async Task<ErrorOr<ItemModel>> GetByIdAsync(int id)
+    {
+        var item = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == id);
+
+        if(item is null)
+        {
+            return Error.NotFound(description: "Item not found!");
+        }
         return new ItemModel(item);
     }
 
-    public async Task<ErrorOr<List<ItemModel>>> GetAllAsync() =>
-        await dbContext.Items.AsNoTracking()
-                                   .Select(x => new ItemModel(x))
-                                   .ToListAsync();
-
-    public async Task<ErrorOr<PaginationModel<ItemModel>>> GetPagedAsync(int page = 0)
+    public async Task<ErrorOr<Success>> UpdateAsync(ItemModel item)
     {
-        page = page <= 0 ? 1 : page - 1;
+        var existingItem = await dbContext.Items.FirstOrDefaultAsync(x => x.Id == item.Id);
 
-        var items = await dbContext.Items.AsNoTracking()
-                                                     .Skip(page * ROW_COUNT)
-                                                     .Take(ROW_COUNT)
-                                                     .Select(x => new ItemModel(x))
-                                                     .ToListAsync();
-
-        var paginationModel = new PaginationModel<ItemModel>
+        if (existingItem is null)
         {
-            Items = items,
-            Count = await dbContext.Items.CountAsync()
-        };
+            return Error.NotFound(description: "Item not found!");
+        }
 
-        return paginationModel;
+        var result = await dbContext.Items.AsNoTracking()
+                                          .Where(x => x.Id == item.Id)
+                                          .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, item.Name)
+                                                                    .SetProperty(p => p.Price, item.Price)
+                                                                    .SetProperty(p => p.Amount, item.Amount));
+        return result > 0 ? Result.Success : Error.NotFound();
     }
 }

@@ -1,27 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Solution.Database.Entities;
+namespace Bills.Database.Entities;
 
 [Table("Item")]
-[Index(nameof(Name), IsUnique = true)]
 public class ItemEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [StringLength(64)]
     [Required]
+    [StringLength(64)]
     public string Name { get; set; }
 
     [Required]
-    public int UnitPrice { get; set; }
+    public double Price { get; set; }
 
     [Required]
-    public int Quantity { get; set; }
+    public int Amount { get; set; }
 
+    //Bills fk
     [Required]
     [ForeignKey("Bill")]
     public int BillId { get; set; }

@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Bills.Core.DTO.Requests;
+using Bills.Core.Models;
 
-namespace Solution.Core.Interfaces;
-
+namespace Bills.Core.Interfaces;
 public interface IItemService
 {
-    Task<ErrorOr<ItemModel>> CreateAsync(ItemModel model);
-    Task<ErrorOr<Success>> UpdateAsync(ItemModel model);
-    Task<ErrorOr<Success>> DeleteAsync(int itemId);
-    Task<ErrorOr<ItemModel>> GetByIdAsync(int itemId);
     Task<ErrorOr<List<ItemModel>>> GetAllAsync();
-    Task<ErrorOr<PaginationModel<ItemModel>>> GetPagedAsync(int page = 0);
+    Task<ErrorOr<ItemModel>> GetByIdAsync(int id);
+    Task<ErrorOr<ItemModel>> CreateAsync(ItemModelRequest item);
+    Task<ErrorOr<Success>> UpdateAsync(ItemModel item);
+    Task<ErrorOr<Success>> DeleteAsync(ItemModel item);
 }
-
-

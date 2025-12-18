@@ -1,25 +1,26 @@
-﻿using FluentValidation;
+﻿using Bills.Core.Models;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Solution.Validators;
 
-namespace Solution.Validators;
+namespace Bills.Validators;
 
-public class BillModelValidator: BaseValidator<BillModel>
+public class BillModelValidator : BaseValidator<BillModel>
 {
-    public static string BillNumberProperty => nameof(BillModel.BillNumber);
-    public static string IssueDateProperty => nameof(BillModel.IssueDate);
-
+    public static string NumberProperty => nameof(BillModel.Number);
+    public static string DateProperty => nameof(BillModel.Date);
+    public static string ItemsProperty => nameof(BillModel.Items);
     public static string GlobalProperty => "Global";
 
-    public BillModelValidator(IHttpContextAccessor httpContextAccessor): base(httpContextAccessor)
+    public BillModelValidator(IHttpContextAccessor httpContextAccessor = null) : base(httpContextAccessor)
     {
-        if (IsPutMethod)
-        {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
-        }
+        RuleFor(x => x.Number).NotEmpty().WithMessage("Number is required!")
+                              .MinimumLength(2).WithMessage("Number must be more than 2 characters!")
+                              .MaximumLength(32).WithMessage("Number must be less than 32 characters!");
 
-        RuleFor(x => x.BillNumber).NotEmpty().WithMessage("Bill number is required");
-        
-        RuleFor(x => x.IssueDate).NotNull().WithMessage("Issue date is required")
-                                   .InclusiveBetween(DateTime.MinValue, DateTime.Now).WithMessage("Invalid issue date");
+        RuleFor(x => x.Date).NotEmpty().WithMessage("Date is required!")
+                            .LessThanOrEqualTo(DateTime.Now).WithMessage("Date cannot be in the future.");
+
+        RuleFor(x => x.Items).NotEmpty().WithMessage("Items are required!");
     }
 }

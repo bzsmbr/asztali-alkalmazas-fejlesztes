@@ -1,5 +1,6 @@
-﻿namespace Solution.Core.Models;
+﻿using Bills.Database.Entities;
 
+namespace Bills.Core.Models;
 public partial class ItemModel : ObservableObject
 {
     [ObservableProperty]
@@ -11,34 +12,59 @@ public partial class ItemModel : ObservableObject
     private string name;
 
     [ObservableProperty]
-    [JsonPropertyName("unitPrice")]
-    private int unitPrice;
+    [JsonPropertyName("price")]
+    private double price;
 
     [ObservableProperty]
-    [JsonPropertyName("quantity")]
-    private int quantity;
+    [JsonPropertyName("amount")]
+    private int amount;
 
-
+    public double Total => Amount * Price;
+    
+    public Guid TempId { get; set; } = Guid.NewGuid();
+    
     public ItemModel()
     {
+        this.Id = id;
+        this.Name = name;
+        this.Price = price;
+        this.Amount = amount;
     }
 
     public ItemModel(ItemEntity entity)
     {
         this.Id = entity.Id;
         this.Name = entity.Name;
-        this.UnitPrice = entity.UnitPrice;
-        this.Quantity = entity.Quantity;
+        this.Price = entity.Price;
+        this.Amount = entity.Amount;
     }
 
     public ItemEntity ToEntity()
     {
         return new ItemEntity
         {
-            Id = Id,
-            Name = Name,
-            UnitPrice = UnitPrice,
-            Quantity = Quantity
+            Id = this.Id,
+            Name = this.Name,
+            Price = this.Price,
+            Amount = this.Amount
         };
+    }
+
+    public void ToEntity(ItemEntity entity)
+    {
+        entity.Id = this.Id;
+        entity.Name = this.Name;
+        entity.Price = this.Price;
+        entity.Amount = this.Amount;
+    }
+
+    partial void OnAmountChanged(int oldValue, int newValue)
+    {
+        OnPropertyChanged(nameof(Total));
+    }
+
+    partial void OnPriceChanged(double oldValue, double newValue)
+    {
+        OnPropertyChanged(nameof(Total));
     }
 }
