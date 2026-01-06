@@ -12,7 +12,7 @@ using Solution.DataBase;
 namespace Solution.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251113075034_init")]
+    [Migration("20251218064017_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -28,7 +28,7 @@ namespace Solution.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.BillEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,74 +36,61 @@ namespace Solution.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BillNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<DateTime>("IssueDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ItemEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemEntityId");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("Bill");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.ItemEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UnitPrice")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.HasIndex("BillId");
 
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.BillEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.ItemEntity", b =>
                 {
-                    b.HasOne("Solution.Database.Entities.ItemEntity", null)
-                        .WithMany("Bills")
-                        .HasForeignKey("ItemEntityId");
-
-                    b.HasOne("Solution.Database.Entities.BillEntity", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
+                    b.HasOne("Bills.Database.Entities.BillEntity", "Bill")
+                        .WithMany("Items")
+                        .HasForeignKey("BillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Item");
+                    b.Navigation("Bill");
                 });
 
-            modelBuilder.Entity("Solution.Database.Entities.ItemEntity", b =>
+            modelBuilder.Entity("Bills.Database.Entities.BillEntity", b =>
                 {
-                    b.Navigation("Bills");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

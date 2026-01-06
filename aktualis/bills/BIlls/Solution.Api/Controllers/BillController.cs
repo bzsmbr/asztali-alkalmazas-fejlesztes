@@ -1,75 +1,81 @@
-﻿using System.Threading.Tasks;
+﻿using Bills.Core.Interfaces;
+using Bills.Core.Models;
+using ErrorOr;
+using Nest;
+using Solution.Api.Controllers;
+using System.ComponentModel.DataAnnotations;
 
-namespace Solution.Api.Controllers;
+namespace Bills.Api.Controllers;
 
-public class BillController(IBillService billService) : BaseController
+public class BillController(IBillService billService) :BaseController
 {
+    //ALL
     [HttpGet]
-    [Route("api/bill/all")]
+    [Route("api/bills/all")]
     public async Task<IActionResult> GetAllAsync()
     {
         var result = await billService.GetAllAsync();
-
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)
         );
     }
 
+    //BY ID
     [HttpGet]
-    [Route("api/bill/id/{id}")]
+    [Route("api/bills/id/{id}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute][Required] int id)
     {
         var result = await billService.GetByIdAsync(id);
-
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)
         );
     }
 
-    [HttpDelete]
-    [Route("api/bill/delete/{id}")]
-    public async Task<IActionResult> DeleteByIdAsync([FromRoute][Required] int id)
-    {
-        var result = await billService.DeleteAsync(id);
-
-        return result.Match(
-            result => Ok(new OkResult()),
-            errors => Problem(errors)
-        );
-    }
-
-    [HttpPost]
-    [Route("api/item/create")]
-    public async Task<IActionResult> CreateAsync([FromBody][Required] BillModel model)
-    {
-        var result = await billService.CreateAsync(model);
-
-        return result.Match(
-            result => Ok(result),
-            errors => Problem(errors)
-        );
-    }
-
-    [HttpPut]
-    [Route("api/bill/update")]
-    public async Task<IActionResult> UpdateAsync([FromBody][Required] BillModel model)
-    {
-        var result = await billService.UpdateAsync(model);
-
-        return result.Match(
-            result => Ok(new OkResult()),
-            errors => Problem(errors)
-        );
-    }
-
+    //PAGED
     [HttpGet]
-    [Route("api/bill/page/{page}")]
+    [Route("api/bills/page/{page}")]
     public async Task<IActionResult> GetPageAsync([FromRoute] int page = 0)
     {
         var result = await billService.GetPagedAsync(page);
 
+        return result.Match(
+            result => Ok(result),
+            errors => Problem(errors)
+        );
+    }
+
+    //CREATE
+    [HttpPost]
+    [Route("api/bills/create")]
+    public async Task<IActionResult> CreateAsync([FromBody][Required] BillModel bill)
+    {
+        var result = await billService.CreateAsync(bill);
+        return result.Match(
+            result => Ok(result),
+            errors => Problem(errors)
+        );
+    }
+
+    //UPDATE
+    [HttpPut]
+    [Route("api/bills/update")]
+    public async Task<IActionResult> UpdateAsync([FromBody][Required] BillModel bill)
+    {
+        var result = await billService.UpdateAsync(bill);
+        return result.Match(
+            result => Ok(result),
+            errors => Problem(errors)
+        );
+    }
+
+    //DELETE
+    [HttpDelete]
+    [Route("api/bills/delete/{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute][Required] int id)
+    {
+        var result = await billService.DeleteAsync(id);
         return result.Match(
             result => Ok(result),
             errors => Problem(errors)

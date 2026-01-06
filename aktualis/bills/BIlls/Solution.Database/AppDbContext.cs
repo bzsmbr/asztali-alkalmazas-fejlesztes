@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Solution.Database.Entities;
+﻿using Bills.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Solution.DataBase;
 

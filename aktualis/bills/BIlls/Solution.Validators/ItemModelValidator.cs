@@ -1,28 +1,26 @@
-﻿using FluentValidation;
+﻿using Bills.Core.Models;
 using Microsoft.AspNetCore.Http;
-using Solution.Database.Migrations;
+using Solution.Validators;
 
-namespace Solution.Validators;
+namespace Bills.Validators;
 
-public class ItemModelValidator: BaseValidator<ItemModel>
+public class ItemModelValidator : BaseValidator<ItemModel>
 {
     public static string NameProperty => nameof(ItemModel.Name);
-    public static string UnitPriceProperty => nameof(ItemModel.UnitPrice);
-    public static string QuantityProperty => nameof(ItemModel.Quantity);
-
+    public static string PriceProperty => nameof(ItemModel.Price);
+    public static string AmountProperty => nameof(ItemModel.Amount);
     public static string GlobalProperty => "Global";
 
-    public ItemModelValidator(IHttpContextAccessor httpContextAccessor): base(httpContextAccessor)
+    public ItemModelValidator(IHttpContextAccessor httpContextAccessor = null) : base(httpContextAccessor)
     {
-        if (IsPutMethod)
-        {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
-        }
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required!")
+                            .MinimumLength(2).WithMessage("Name must be more than 2 characters!")
+                            .MaximumLength(32).WithMessage("Name must be less than 32 characters!");
 
-        RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
+        RuleFor(x => x.Price).NotNull().WithMessage("Price is required")
+                             .GreaterThan(0).WithMessage("Price must be greater than 0!");
 
-        RuleFor(x => x.UnitPrice).NotNull().WithMessage("Unit Price cant be null");
-
-        RuleFor(x => x.Quantity).NotNull().WithMessage("Quantity cant be null");
+        RuleFor(x => x.Amount).NotNull().WithMessage("Amount is required")
+                              .GreaterThan(0).WithMessage("Amount must be greater than 0!");
     }
 }

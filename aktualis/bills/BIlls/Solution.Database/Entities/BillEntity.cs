@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Solution.Database.Entities;
+namespace Bills.Database.Entities;
 
 [Table("Bill")]
 public class BillEntity
@@ -10,16 +10,13 @@ public class BillEntity
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-
-    [StringLength(20)]
     [Required]
-    public string BillNumber { get; set; }
+    public string Number { get; set; }
 
     [Required]
-    public DateTime IssueDate { get; set; }
+    public DateTime Date { get; set; }
 
-    [ForeignKey("Item")]
-    public int ItemId { get; set; }
+    //Items
+    public virtual ICollection<ItemEntity> Items { get; set; }
 
-    public virtual BillEntity Item { get; set; }
 }

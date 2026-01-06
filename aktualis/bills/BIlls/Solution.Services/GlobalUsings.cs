@@ -1,10 +1,4 @@
 ﻿global using ErrorOr;
-global using Google.Apis.Auth.OAuth2;
-global using Google.Apis.Drive.v3;
-global using Google.Apis.Drive.v3.Data;
-global using Google.Apis.Services;
-global using Solution.Core.Interfaces;
-global using Solution.DataBase;
 global using Microsoft.EntityFrameworkCore;
 global using Solution.Core.Models;
-global using Microsoft.Maui.Storage;
+global using Solution.DataBase;
