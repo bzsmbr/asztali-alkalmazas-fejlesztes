@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Bills.Core.Models;assembly=Bills.Core"
+             xmlns:components="clr-namespace:Bills.DesktopApp.Components"
+             xmlns:viewModels="clr-namespace:Bills.DesktopApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewModels:ListBillsViewModel"
+             x:Class="Bills.DesktopApp.Views.ListBillsView"
+             x:Name="this">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" 
+                                        EventName="Appearing"
+                                        BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+    </ContentPage.Behaviors>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Text="List bills"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Style="{StaticResource SubHeadline}"/>
+
+        <ScrollView Grid.Row="1">
+            
+            <CollectionView ItemsSource="{Binding Bills}" Margin="50,0,50,0">
+                
+                <CollectionView.Header>
+                    
+                    <Grid Padding="10,0,10,0">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="80" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="Bill date"
+                               HorizontalTextAlignment="Center" />
+                        
+                        <Label Grid.Column="1"
+                               Text="Bill number"
+                               HorizontalTextAlignment="Center" />
+                        
+                        <Label Grid.Column="2"
+                               Text="Total price"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="3"
+                               Text="Edit"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="4"
+                               Text="Delete"
+                               HorizontalTextAlignment="Center" />
+
+                    </Grid>
+                
+                </CollectionView.Header>
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:BillModel">
+                        <components:BillListComponent Bill="{Binding .}"
+                                                      DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ListBillsViewModel}}, Path=DeleteCommand}"
+                                                      CommandParameter="{Binding Id}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+                <CollectionView.Footer>
+                    
+                    <FlexLayout JustifyContent="SpaceBetween" 
+                                Direction="Row"
+                                Margin="0,20">
+                        
+                        <Button Text="Previous page" Command="{Binding PreviousPageCommand}" />
+                        
+                        <Button Text="Next page" Command="{Binding NextPageCommand}" />
+                        
+                    </FlexLayout>
+                    
+                </CollectionView.Footer>
+                
+            </CollectionView>
+            
+        </ScrollView>
+
+    </Grid>
+    
+</ContentPage>

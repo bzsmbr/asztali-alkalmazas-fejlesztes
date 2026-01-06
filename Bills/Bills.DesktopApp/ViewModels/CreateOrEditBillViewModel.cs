@@ -1,6 +1,4 @@
 ﻿
-using Solution.DataBase;
-
 namespace Bills.DesktopApp.ViewModels;
 
 public partial class CreateOrEditBillViewModel(
