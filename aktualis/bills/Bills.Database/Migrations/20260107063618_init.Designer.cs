@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bills.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251106081955_fixedBillNumber")]
-    partial class fixedBillNumber
+    [Migration("20260107063618_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

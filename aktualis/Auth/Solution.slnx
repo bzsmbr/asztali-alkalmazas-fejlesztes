@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/" />
+  <Project Path="Solution.Domain/Solution.Domain.csproj" />
+  <Project Path="Solution.Services/Solution.Services.csproj" />
+  <Project Path="Solution.Shared/Solution.Shared.csproj" />
+  <Project Path="Solution.WebAPI/Solution.WebAPI.csproj" />
+</Solution>
