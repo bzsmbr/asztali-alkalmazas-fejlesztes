@@ -26,8 +26,4 @@
     <ProjectReference Include="..\Solution.Shared\Solution.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
