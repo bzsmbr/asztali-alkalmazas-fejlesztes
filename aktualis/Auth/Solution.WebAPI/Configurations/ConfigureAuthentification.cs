@@ -5,8 +5,8 @@ public static class ConfigureAuthentification
     extension(IHostApplicationBuilder builder)
     {
         public IHostApplicationBuilder UseSecurity()
-        { 
-            var settings = builder.Configuration.GetSection("JTW").Get<JWTSettingsModel>();
+        {
+            var settings = builder.Configuration.GetSection("JWT").Get<JWTSettingsModel>();
 
             builder.Services.AddAuthorization(options =>
             {

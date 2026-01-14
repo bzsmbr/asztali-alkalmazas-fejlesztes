@@ -1,6 +1,4 @@
-﻿using Solution.Domain.Models.Settings;
-
-namespace Solution.WebAPI.Configurations;
+﻿namespace Solution.WebAPI.Configurations;
 
 public static class SettingsConfiguration
 {

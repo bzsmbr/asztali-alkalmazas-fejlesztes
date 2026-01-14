@@ -25,7 +25,7 @@ public class SecurityService(UserManager<UserEntity> userManager, IOptions<JWTSe
             UserName = $"{model.FirstName}.{model.LastName}",
         },model.Password);
 
-        var errors = result.Errors.Select(x => x.Description));
+        var errors = result.Errors.Select(x => x.Description);
         return result.Succeeded ? 
             Result.Success : 
             Error.Failure(description: string.Join(", ", errors));
