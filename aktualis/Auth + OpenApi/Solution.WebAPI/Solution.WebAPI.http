@@ -1,0 +1,27 @@
+@Solution.WebAPI_HostAddress = https://localhost:5000
+
+###
+POST {{Solution.WebAPI_HostAddress}}/api/security/register/
+Accept: application/json
+Content-Type: application/json
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phoneNumber": "+15551234567",
+  "password": "P@ssw0rd123",
+  "confirmPassword": "P@ssw0rd123"
+}
+
+###
+POST {{Solution.WebAPI_HostAddress}}/api/security/login/
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "john.doe@example.com",
+  "password": "P@ssw0rd123"
+}
+
+###
+GET {{Solution.WebAPI_HostAddress}}/api/users
+Accept: application/json
