@@ -1,0 +1,11 @@
+﻿global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.OpenApi;
+global using Scalar.AspNetCore;
+global using Swashbuckle.AspNetCore.Annotations;
+global using System.Net;
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.OpenApi;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using System.Text;

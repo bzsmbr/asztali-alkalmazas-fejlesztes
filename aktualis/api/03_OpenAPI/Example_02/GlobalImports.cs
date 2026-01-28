@@ -1,0 +1,10 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.OpenApi;
+global using Swashbuckle.AspNetCore.Annotations;
+global using System.Net;
+global using System.Reflection;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.OpenApi;
+global using Example_02.Transformers;
